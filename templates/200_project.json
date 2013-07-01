@@ -1,0 +1,15 @@
+{
+    "status": {
+        "code": 200,
+        "description": "OK",
+        "type": "project",
+        "uri": "%{uri}"
+    },
+    "project": "%{project}",
+    "description": "Information about '%{project}'.",
+    "endpoints": {
+        "episode": "http://%{host}/%{project}/$episode",
+        "all": "http://%{host}/%{project}/all"
+    },
+    "episodes": %{episodes}
+}

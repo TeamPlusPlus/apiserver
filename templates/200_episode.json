@@ -1,0 +1,9 @@
+{
+    "status": {
+        "code": 200,
+        "description": "OK",
+        "type": "episode",
+        "uri": "%{uri}"
+    },
+    §{episode}
+}

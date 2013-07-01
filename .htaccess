@@ -1,0 +1,26 @@
+RewriteEngine On
+RewriteBase /
+
+# Files
+RewriteCond files%{REQUEST_URI} -F
+RewriteRule ^([a-z]+?)/([1-9]+?)\.([a-z0-9]+)$ /lib/endpoints/log.php?project=$1&episode=$2&extension=$3 [L]
+
+# Nonexisting files
+RewriteRule ^([a-z]+?/[1-9]*\.[a-z0-9]+)$ /lib/endpoints/404.php?type=file [L]
+
+# API requests from cache (episodes and listing)
+RewriteCond cache%{REQUEST_URI}.json -F
+RewriteRule ^([a-z]+/([1-9]+|all))$ cache/$1.json [L]
+
+# API requests from cache (projects)
+RewriteCond cache%{REQUEST_URI}/index.json -F
+RewriteRule ^([a-z]+)/?$ cache/$1/index.json [L]
+
+# API request for index page
+RewriteRule ^$ cache/index.json [L]
+
+# Tasks
+RewriteRule ^task(?:/([a-z]*)/?([a-z0-9:]*)/?)?$ lib/endpoints/task.php?task=$1&args=$2 [L]
+
+# Everything else
+ErrorDocument 404 /lib/endpoints/404.php?type=endpoint

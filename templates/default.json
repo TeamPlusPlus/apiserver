@@ -1,0 +1,9 @@
+{
+    "status": {
+        "code": 501,
+        "description": "Not Implemented",
+        "type": "error",
+        "uri": "%{uri}"
+    },
+    "description": "There is no template for that."
+}

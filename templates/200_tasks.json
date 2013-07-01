@@ -1,0 +1,10 @@
+{
+    "status": {
+        "code": 200,
+        "description": "OK",
+        "type": "tasks",
+        "uri": "%{uri}"
+    },
+    "description": "Listing all tasks.",
+    "tasks": %{tasks}
+}

@@ -1,0 +1,12 @@
+{
+    "status": {
+        "code": 404,
+        "description": "Not Found",
+        "type": "file_404",
+        "uri": "%{uri}"
+    },
+    "project": "%{project}",
+    "episode": %{episode},
+    "file": "%{extension}",
+    "description": "There is no file named '%{project}/%{episode}.%{extension}'."
+}

@@ -1,0 +1,9 @@
+{
+    "status": {
+        "code": 500,
+        "description": "Internal Server Error",
+        "type": "error",
+        "uri": "%{uri}"
+    },
+    "description": "%{desc}"
+}

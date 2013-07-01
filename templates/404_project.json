@@ -1,0 +1,10 @@
+{
+    "status": {
+        "code": 404,
+        "description": "Not Found",
+        "type": "project_404",
+        "uri": "%{uri}"
+    },
+    "project": "%{project}",
+    "description": "There is no project named '%{project}'."
+}

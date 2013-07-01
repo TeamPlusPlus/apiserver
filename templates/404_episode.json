@@ -1,0 +1,11 @@
+{
+    "status": {
+        "code": 404,
+        "description": "Not Found",
+        "type": "episode_404",
+        "uri": "%{uri}"
+    },
+    "project": "%{project}",
+    "episode": %{episode},
+    "description": "There is no episode named '%{project}/%{episode}'."
+}

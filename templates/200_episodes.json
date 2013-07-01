@@ -1,0 +1,11 @@
+{
+    "status": {
+        "code": 200,
+        "description": "OK",
+        "type": "episodes",
+        "uri": "%{uri}"
+    },
+    "project": "%{project}",
+    "description": "Listing all episodes for '%{project}'.",
+    "episodes": %{episodes}
+}

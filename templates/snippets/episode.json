@@ -1,0 +1,28 @@
+"project": "%{project}",
+"episode": %{episode},
+"description": "Information about '%{project}/%{episode}'.",
+"chapters": %{chapters},
+"duration": %{duration},
+"infos": {
+    "album": "%{infos:album}",
+    "track": %{episode},
+    "title": "%{infos:title}",
+    "subtitle": "%{infos:subtitle}",
+    "summary": "%{infos:summary}",
+    "publisher": "%{infos:publisher}",
+    "artist": "%{infos:artist}",
+    "license": {
+        "name": "%{infos:license:name}",
+        "url": "%{infos:license:url}"
+    },
+    "url": "%{infos:url}",
+    "year": "%{infos:year}",
+    "genre": "%{infos:genre}",
+    "tags": %{infos:tags}
+},
+"files": {
+    "media": %{files:media},
+    "meta": %{files:meta},
+    "cover": %{files:cover},
+    "other": %{files:other}
+}
