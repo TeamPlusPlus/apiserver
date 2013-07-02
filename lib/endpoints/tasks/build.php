@@ -28,6 +28,9 @@ class BuildTask extends Task {
 		"auphonic" => "927428b279a7cc98f150ad7d938b050c"
 	);
 	
+	// Endpoints
+	public $endpoints = array('episode' => '$project:$episode');
+	
 	/**
 	 * Check if everything is OK
 	 * 
@@ -101,6 +104,7 @@ class BuildTask extends Task {
 		foreach($files as $name => $json) {
 			if(!@file_put_contents(ROOT_CACHE . '/' . $name, $json)) {
 				return new APIResponse('task', 500, array(
+					'endpoints' => json_encode($this->endpoints),
 					'task' => 'build',
 					'desc' => 'There was an error writing the file \'' . $name . '\'.'
 				));
@@ -116,6 +120,7 @@ class BuildTask extends Task {
 		$status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
 		if($status != 201) {
 			return new APIResponse('task', 500, array(
+				'endpoints' => json_encode($this->endpoints),
 				'task' => 'build',
 				'desc' => 'The HTTP status for triggering the project\'s update page (http://' . $args[0] . '.plusp.lu/apitrigger) was ' . $status . ' (expected 201).'
 			));
@@ -124,6 +129,7 @@ class BuildTask extends Task {
 		curl_close($handle);
 		
 		return new APIResponse('task', 201, array(
+			'endpoints' => json_encode($this->endpoints),
 			'task' => 'build',
 			'desc' => 'Successfully published \'' . $args[0] . '/' . $args[1] . '\'.'
 		));
@@ -288,6 +294,7 @@ class BuildTask extends Task {
 			$data = json_decode($response->body, true);
 			
 			$errorResponse = new APIResponse('task', 500, array(
+				'endpoints' => json_encode($this->endpoints),
 				'task' => 'build',
 				'desc' => $data['description']
 			));

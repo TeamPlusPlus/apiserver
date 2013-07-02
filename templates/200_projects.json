@@ -6,5 +6,9 @@
         "uri": "%{uri}"
     },
     "description": "Listing all projects.",
+    "endpoints": {
+    	"project": "http://%{host}/$project",
+    	"tasks": "http://%{host}/task"
+    },
     "projects": %{projects}
 }

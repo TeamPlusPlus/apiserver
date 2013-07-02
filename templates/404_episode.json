@@ -7,5 +7,6 @@
     },
     "project": "%{project}",
     "episode": %{episode},
+    "endpoints": {},
     "description": "There is no episode named '%{project}/%{episode}'."
 }

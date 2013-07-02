@@ -6,5 +6,6 @@
         "uri": "%{uri}"
     },
     "project": "%{project}",
+    "endpoints": {},
     "description": "There is no project named '%{project}'."
 }

@@ -8,5 +8,6 @@
     "project": "%{project}",
     "episode": %{episode},
     "file": "%{extension}",
+    "endpoints": {},
     "description": "There is no file named '%{project}/%{episode}.%{extension}'."
 }

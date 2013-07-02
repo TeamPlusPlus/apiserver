@@ -6,5 +6,6 @@
         "uri": "%{uri}"
     },
     "task": "%{task}",
+    "endpoints": %{endpoints},
     "description": "There is no task named '%{task}'."
 }

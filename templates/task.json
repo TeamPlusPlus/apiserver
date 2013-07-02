@@ -6,5 +6,6 @@
         "uri": "%{uri}"
     },
     "task": "%{task}",
+    "endpoints": %{endpoints},
     "description": "%{desc}"
 }

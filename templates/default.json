@@ -5,5 +5,7 @@
         "type": "error",
         "uri": "%{uri}"
     },
+    "endpoints": {},
+    "endpoints": {},
     "description": "There is no template for that."
 }

@@ -6,5 +6,8 @@
         "uri": "%{uri}"
     },
     "description": "Listing all tasks.",
+    "endpoints": {
+    	"task": "http://%{host}/task/$task"
+    },
     "tasks": %{tasks}
 }

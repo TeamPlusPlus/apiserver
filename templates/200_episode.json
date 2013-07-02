@@ -5,5 +5,8 @@
         "type": "episode",
         "uri": "%{uri}"
     },
+    "endpoints": {
+    	"file": "http://%{host}/%{project}/%{episode}.$extension"
+    },
     §{episode}
 }

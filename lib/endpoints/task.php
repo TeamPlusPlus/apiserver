@@ -38,6 +38,7 @@ if(file_exists($filename)) {
 			// Let the task check if everything is OK
 			if(is_string($error = $task->check($args, $user))) {
 				$response = new APIResponse('task', 400, array(
+					'endpoints' => json_encode($task->endpoints),
 					'task' => $_GET['task'],
 					'desc' => 'There was an error running the task: \'' . $error . '\'.'
 				));
@@ -50,6 +51,7 @@ if(file_exists($filename)) {
 		} else {
 			// No access
 			$response = new APIResponse('task', 403, array(
+				'endpoints' => json_encode($task->endpoints),
 				'task' => $_GET['task'],
 				'desc' => 'You are not allowed to run that task.'
 			));
@@ -77,15 +79,7 @@ if(file_exists($filename)) {
 			// Get task name
 			$taskName = pathinfo($task, PATHINFO_FILENAME);
 			
-			// Include to get params
-			$taskFile = @include ROOT_TASKS . '/' . $task;
-			if(is_string($taskFile) && $taskFile) {
-				$params = '/' . $taskFile;
-			} else {
-				$params = '';
-			}
-			
-			$tasks[$taskName] = 'http://' . $_SERVER['HTTP_HOST'] . '/task/' . $taskName . $params;
+			$tasks[$taskName] = 'http://' . $_SERVER['HTTP_HOST'] . '/task/' . $taskName;
 		}
 		
 		$response = new APIResponse('tasks', 200, array(
@@ -111,6 +105,9 @@ class Task {
 	
 	// Authentication
 	public $auth = array();
+	
+	// Endpoints
+	public $endpoints = array('base' => '');
 	
 	/**
 	 * Check if everything is OK
