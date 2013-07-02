@@ -107,6 +107,22 @@ class BuildTask extends Task {
 			}
 		}
 		
+		// Trigger the API client
+		$handle = curl_init('http://' . $args[0] . '.plusp.lu/apitrigger');
+		curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+		curl_exec($handle);
+		
+		// Check if it returns the correct HTTP status
+		$status = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+		if($status != 201) {
+			return new APIResponse('task', 500, array(
+				'task' => 'build',
+				'desc' => 'The HTTP status for triggering the project\'s update page (http://' . $args[0] . '.plusp.lu/apitrigger) was ' . $status . ' (expected 201).'
+			));
+		}
+
+		curl_close($handle);
+		
 		return new APIResponse('task', 201, array(
 			'task' => 'build',
 			'desc' => 'Successfully published \'' . $args[0] . '/' . $args[1] . '\'.'
