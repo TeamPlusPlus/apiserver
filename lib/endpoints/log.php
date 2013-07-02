@@ -76,8 +76,8 @@ if(!isset($data['ips'][$ipHash][$extension])) {
 	}
 	
 	// Country
-	require_once(ROOT_THIRDPARTY . '/GeoIP/GeoIP.php');
-	$geoip = Net_GeoIP::getInstance(ROOT_THIRDPARTY . '/GeoIP/GeoIP.dat');
+	require_once(ROOT_THIRDPARTY . '/Net_GeoIP/Net/GeoIP.php');
+	$geoip = Net_GeoIP::getInstance(ROOT_THIRDPARTY . '/Net_GeoIP/data/GeoIP.dat');
 	try {
 		$country = $geoip->lookupCountryName($_SERVER['REMOTE_ADDR']);
 		if($country == '') $country = 'Unknown';
