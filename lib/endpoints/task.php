@@ -88,6 +88,7 @@ if(file_exists($filename)) {
 		$response->send();
 	} else {
 		$response = new APIResponse('task', 404, array(
+			'endpoints' => '{}',
 			'task' => $_GET['task']
 		));
 		$response->send();
