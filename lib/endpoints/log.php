@@ -8,7 +8,7 @@
  *
  * @version 1.0
  * @author Lukas Bestle <http://lu-x.me>
- * @link https://github.com/TeamPlusPlus/api
+ * @link https://github.com/TeamPlusPlus/apiserver
  * @copyright Copyright 2013 Lukas Bestle
  * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  */
