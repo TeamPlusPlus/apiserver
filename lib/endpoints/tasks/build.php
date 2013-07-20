@@ -13,6 +13,9 @@
  * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  */
 
+// Include SimpleImage
+require_once(ROOT_THIRDPARTY . '/SimpleImage.php');
+
 /**
  * BuildTask
  * 
@@ -146,6 +149,12 @@ class BuildTask extends Task {
 	private function buildEpisode($project, $episode) {
 		$basename = ROOT_FILES . '/' . $project . '/' . $episode;
 		
+		// Render smaller versions of the cover
+		static::cover($basename . '.png', array(
+			400 => $basename . '_400.png',
+			250 => $basename . '_250.png'
+		));
+		
 		// Get metadata from file
 		$json = json_decode(file_get_contents(ROOT_FILES . '/' . $project . '/' . $episode . '.json'), true);
 		
@@ -153,12 +162,16 @@ class BuildTask extends Task {
 		$chapters = $this->chapters($json['chapters']);
 		
 		// Analyze episode files
-		$fileNames = glob(ROOT_FILES . '/' . $project . '/' . $episode . '.*');
+		$fileNames = glob(ROOT_FILES . '/' . $project . '/' . $episode . '*.*');
 		$files = array('media' => array(), 'meta' => array(), 'cover' => array(), 'other' => array());
 		foreach($fileNames as $file) {
 			$analyzed = $this->analyze($file, $project, $episode);
 			
-			$files[$analyzed['type']][$analyzed['extension']] = $analyzed['data'];
+			if($analyzed['type'] == 'cover') {
+				$files[$analyzed['type']][$analyzed['extension']][$analyzed['size']] = $analyzed['data'];
+			} else {
+				$files[$analyzed['type']][$analyzed['extension']] = $analyzed['data'];
+			}
 		}
 		
 		// Build episode file
@@ -318,6 +331,7 @@ class BuildTask extends Task {
 		$extension = pathinfo($file, PATHINFO_EXTENSION);
 		
 		$custom = array();
+		$customRoot = array();
 		switch($extension) {
 			case 'mp3':
 			case 'm4a':
@@ -338,8 +352,9 @@ class BuildTask extends Task {
 				
 				$custom = array(
 					'dimensions' => $dimensions,
-					'url'        => 'http://' . $_SERVER['HTTP_HOST'] . '/files/' . $project . '/' . $episode . '.' . $extension
+					'url'        => ($dimensions[0] == 1000)? 'http://' . $_SERVER['HTTP_HOST'] . '/files/' . $project . '/' . $episode . '.' . $extension : 'http://' . $_SERVER['HTTP_HOST'] . '/files/' . $project . '/' . $episode . '_' . $dimensions[0] . '.' . $extension
 				);
+				$customRoot = array('size' => $dimensions[0]);
 				
 				break;
 			default:
@@ -351,11 +366,27 @@ class BuildTask extends Task {
 			'size' => filesize($file)
 		), $custom);
 		
-		return array(
+		return array_merge(array(
 			'type' => $type,
 			'extension' => $extension,
 			'data' => $data
-		);
+		), $customRoot);
+	}
+	
+	/**
+	 * Render smaller versions of a cover
+	 * 
+	 * @param string $file     The path to the image file
+	 * @param array  $versions All versions to render
+	 */
+	private function cover($file, $versions=array()) {
+		// Load the image file
+		$image = new SimpleImage();
+  	$image->load($file);
+  	foreach($versions as $size => $path) {
+  		$image->resize($size, $size);
+  		$image->save($path);
+  	}
 	}
 }
 
