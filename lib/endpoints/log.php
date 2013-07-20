@@ -6,7 +6,7 @@
  *
  * @file endpoints/log.php - request logger
  *
- * @version 1.0
+ * @version 1.0.1
  * @author Lukas Bestle <http://lu-x.me>
  * @link https://github.com/TeamPlusPlus/apiserver
  * @copyright Copyright 2013 Lukas Bestle
@@ -38,8 +38,10 @@ if(!is_dir(ROOT_LOGS . '/' . $project)) {
 // Open the existing log file
 $filename = ROOT_LOGS . '/' . $project . '/' . $episode . '.json';
 
+$log = '';
 if(file_exists($filename)) {
-	$data = json_decode(file_get_contents($filename), true);
+	$log = file_get_contents($filename);
+	$data = json_decode($log, true);
 } else {
 	// New file
 	$data = array(
@@ -109,7 +111,13 @@ if(!is_dir(ROOT_LOGS . '/' . $project)) {
 }
 
 // Save the log file
-file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT));
+$result = json_encode($data, JSON_PRETTY_PRINT);
+if(strlen($result) >= strlen($log)) {
+	file_put_contents($filename, $result);
+} else {
+	// The result is actually smaller than the original file --> Error
+	mail('lukas@lu-x.me', 'Bug!', 'The log file purge bug happened!');
+}
 
 // Redirect to destination
 http_response_code(301);
