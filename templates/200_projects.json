@@ -2,7 +2,7 @@
     "status": {
         "code": 200,
         "description": "OK",
-        "type": "episodes",
+        "type": "projects",
         "uri": "%{uri}"
     },
     "description": "Listing all projects.",
