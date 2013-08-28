@@ -22,10 +22,10 @@ $episode = $_GET['episode'];
 $extension = $_GET['extension'];
 
 // Check if the episode is even published yet
-if(!file_exists(ROOT_CACHE . '/' . $project . '/' . $episode . '.json')) {
+if(!file_exists(ROOT_CACHE . '/' . $project . '/' . $episode . '.json') || !file_exists(ROOT_FILES . '/' . $project . '/' . $episode . '.' . $extension)) {
 	$response = new APIResponse('404_episode', 404, array(
 		'project' => $project,
-		'episode' => $episode
+		'episode' => (int)$episode
 	));
 	$response->send();
 }
