@@ -5,6 +5,9 @@ RewriteBase /
 RewriteCond files%{REQUEST_URI} -F
 RewriteRule ^([a-z]+?)/([1-9]+?)\.([a-z0-9]+)$ /lib/endpoints/log.php?project=$1&episode=$2&extension=$3 [L]
 
+# Relive
+RewriteRule ^([a-z]+?)/([1-9]+?)\.relive$ /lib/endpoints/log.php?project=$1&episode=$2_relive&extension=mp3 [L]
+
 # Nonexisting files
 RewriteRule ^([a-z]+?/[1-9]*\.[a-z0-9]+)$ /lib/endpoints/404.php?type=file [L]
 
