@@ -19,6 +19,9 @@ RewriteRule ^([a-z]+)/?$ cache/$1/index.json [L]
 # API request for index page
 RewriteRule ^$ cache/index.json [L]
 
+# Live stream
+RewriteRule ^live(?:/([a-z]*)/?)?$ lib/endpoints/live.php?project=$1 [L]
+
 # Tasks
 RewriteRule ^task(?:/([a-z]*)/?([a-z0-9:]*)/?)?$ lib/endpoints/task.php?task=$1&args=$2 [L]
 

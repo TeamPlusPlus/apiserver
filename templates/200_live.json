@@ -1,0 +1,14 @@
+{
+    "status": {
+        "code": %{status:code},
+        "description": "%{status:desc}",
+        "type": "live",
+        "uri": "%{uri}"
+    },
+    "endpoints": {},
+    "live": %{live},
+    "url": %{url},
+    "project": "%{project}",
+    "episode": %{episode},
+    "topic": %{topic}
+}
